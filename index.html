@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Svátky</title>
+    <script>
+        const HOST = window.location.protocol + "//" + window.location.hostname + ((window.location.port) ? ":" + window.location.port : "") + window.location.pathname;
+        function poSpusteni() {
+            let url = HOST+"datumy.php";
+            fetch(url).then(function(response) {
+                response.text().then(function(text) {
+                    let obj = JSON.parse(text);
+                    document.getElementById("vystup").innerHTML =
+                        "Dnes je " + obj.denVTydnu + "  " + obj.datum + " a svátek má " + obj.svatek + ".";
+                });
+            });
+        }
+    </script>
+</head>
+<body onload="poSpusteni()">
+
+<h1>Svátky</h1>
+
+<div id="vystup">...</div>
+
+</body>
+</html>
